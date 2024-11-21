@@ -1,0 +1,51 @@
+<h1 class="text-center">Board Name: <%= @board.name %></h1>
+
+<div class="row mt-4 mb-4">
+  <div class="col-md-8 offset-md-2">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Creator Email</th>
+          <th>Size</th>
+          <th>Number of Mines</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @board.creator_email %></td>
+          <td><%= @board.columns_count %> x <%= @board.rows_count %></td>
+          <td><%= @board.mines_count %></td>
+          <td><%= local_time(@board.created_at) %> (<%= local_time_ago(@board.created_at) %>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-12 mt-3" style="overflow-x: scroll; white-space: nowrap; padding: 0;">
+    <div class="text-center" style="line-height: 1.2;">
+      <% if @board.data.is_a?(Array) %>
+        <% @board.data.each do |row| %>
+          <% row.each do |cell| %>
+            <span class="board-cell" data-number="<%= cell %>"><%= cell != 9 ? "⬜️" : "💣" %></span>
+          <% end %>
+          <br>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="text-center mt-3" data-controller="board">
+    <button class="btn btn-primary" id="reveal-board" data-action="click->board#reveal">Reveal Board States</button>
+    <button class="btn btn-primary" id="hide-board" data-action="click->board#hide">Hide Board States</button>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to "Delete", board_path(@board, redirect_location: request.referrer || root_url), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to "Back to Board list", boards_path, class: "btn btn-secondary" %>
+    <%= link_to "Back to Home", root_path, class: "btn btn-secondary" %>
+  </div>
+</div>

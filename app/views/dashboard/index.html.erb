@@ -1,0 +1,66 @@
+<h1 class="text-center">Minesweeper Board Generator</h1>
+
+<div class="row mt-4 mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h3>Create a New Board</h3>
+
+    <%= form_for @board, url: boards_path, method: :post, html_options: { class: "mt-3" } do |form| %>
+      <div class="mb-1">
+        <label for="rows" class="form-label">Board Name:</label>
+        <%= form.text_field :name, class: "form-control", required: true %>
+      </div>
+      <div class="mb-1">
+        <label for="rows" class="form-label">Creator Email:</label>
+        <%= form.email_field :creator_email, class: "form-control", required: true %>
+      </div>
+      <div class="mb-1">
+        <label for="columns" class="form-label">Board Width:</label>
+        <%= form.number_field :columns_count, class: "form-control", required: true %>
+      </div>
+      <div class="mb-1">
+        <label for="rows" class="form-label">Board Height:</label>
+        <%= form.number_field :rows_count, class: "form-control", required: true %>
+      </div>
+      <div class="mb-3">
+        <label for="mines" class="form-label">Number of Mines:</label>
+        <%= form.number_field :mines_count, class: "form-control", required: true %>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Generate Board</button>
+    <% end %>
+  </div>
+</div>
+
+<div class="row mt-5 mb-5">
+  <div class="col-md-8 offset-md-2">
+    <h2 class="text-center">Most Recent Boards</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Creator Email</th>
+          <th>Generated At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @most_recent_boards.each_with_index do |board, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= link_to board.name, board_path(board) %></td>
+            <td><%= board.creator_email %></td>
+            <td><%= local_time(board.created_at) %> (<%= local_time_ago(board.created_at) %>)</td>
+            <td>
+              <%= link_to "View", board_path(board), class: "btn btn-sm btn-primary" %>
+              <%= link_to "Delete", board_path(board), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= link_to "View all generated Boards", boards_path, class: "btn btn-secondary" %>
+  </div>
+</div>
