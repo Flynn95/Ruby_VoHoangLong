@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.new(board_params)
-    @board.data = BoardCellsGenerator.new(@board.rows_count, @board.columns_count, @board.mines_count).generate
+    @board.data = BoardCellsGenerator.new(@board.rows_count, @board.columns_count, @board.mines_count).generate if @board.valid?
 
     if @board.save
       redirect_to root_path, notice: "Minesweeper board was successfully created. Click #{view_context.link_to 'here', board_path(@board), class: "alert-link"} to view it."
@@ -25,9 +25,9 @@ class BoardsController < ApplicationController
     @board.destroy
 
     if params[:redirect_location].present?
-      redirect_to params[:redirect_location], notice: 'Minesweeper board was successfully destroyed.'
+      redirect_to params[:redirect_location], notice: "Minesweeper board was successfully destroyed."
     else
-      redirect_back fallback_location: boards_url, notice: 'Minesweeper board was successfully destroyed.'
+      redirect_back fallback_location: boards_url, notice: "Minesweeper board was successfully destroyed."
     end
   end
 
@@ -38,6 +38,6 @@ class BoardsController < ApplicationController
 
     def set_board
       @board = Board.find_by(id: params[:id])
-      redirect_back fallback_location: boards_url, alert: 'Minesweeper board not found.' if @board.blank?
+      redirect_back fallback_location: boards_url, alert: "Minesweeper board not found." if @board.blank?
     end
 end
