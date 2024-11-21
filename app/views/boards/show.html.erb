@@ -23,15 +23,8 @@
   </div>
 
   <div class="col-md-12 mt-3" style="overflow-x: scroll; white-space: nowrap; padding: 0;">
-    <div class="text-center" style="line-height: 1.2;">
-      <% if @board.data.is_a?(Array) %>
-        <% @board.data.each do |row| %>
-          <% row.each do |cell| %>
-            <span class="board-cell" data-number="<%= cell %>"><%= cell != 9 ? "⬜️" : "💣" %></span>
-          <% end %>
-          <br>
-        <% end %>
-      <% end %>
+    <div class="text-center" style="line-height: 1.5;">
+      <%= @preformatted_data %>
     </div>
   </div>
 

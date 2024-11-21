@@ -5,7 +5,9 @@ class BoardsController < ApplicationController
     @boards = Board.all.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @preformatted_data = BoardDataFormatter.new(@board.data).format
+  end
 
   def create
     @board = Board.new(board_params)
