@@ -82,8 +82,8 @@ production:
   primary: &primary_production
     <<: *default
     database: minesweeper_board_generator_production
-    username: <%= ENV["DATABASE_USERNAME"] %>
-    password: <%= ENV["DATABASE_PASSWORD"] %>
+    username: minesweeper_board_generator
+    password: <%= ENV["MINESWEEPER_BOARD_GENERATOR_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: minesweeper_board_generator_production_cache
