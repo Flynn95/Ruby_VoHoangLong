@@ -33,13 +33,13 @@ module GameBoard
 
       def placing_mines
         mine_coordinates.each do |row, column|
-          board[row][column] = 'M'
+          board[row][column] = "M"
         end
       end
 
       def placing_numbers
         cell_coordinates.each do |row, column|
-          next if board[row][column] == 'M'
+          next if board[row][column] == "M"
 
           board[row][column] = count_mines_around(row, column)
         end
@@ -48,12 +48,12 @@ module GameBoard
       def count_mines_around(row, column)
         mine_count = 0
 
-        ([-1, 0, 1].repeated_permutation(2).to_a - [[0, 0]]).each do |dx, dy|
+        ([ -1, 0, 1 ].repeated_permutation(2).to_a - [ [ 0, 0 ] ]).each do |dx, dy|
           r = row + dx
           c = column + dy
           next if r < 0 || c < 0 || r >= height || c >= width
 
-          mine_count += 1 if board[r][c] == 'M'
+          mine_count += 1 if board[r][c] == "M"
         end
 
         mine_count
