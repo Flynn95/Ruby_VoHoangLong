@@ -14,8 +14,8 @@
       <tbody>
         <tr>
           <td><%= @board.creator_email %></td>
-          <td><%= @board.columns_count %> x <%= @board.rows_count %></td>
-          <td><%= @board.mines_count %></td>
+          <td><%= @board.width %> x <%= @board.height %></td>
+          <td><%= @board.number_of_mines %></td>
           <td><%= local_time(@board.created_at) %> (<%= local_time_ago(@board.created_at) %>)</td>
         </tr>
       </tbody>

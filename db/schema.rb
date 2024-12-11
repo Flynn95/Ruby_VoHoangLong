@@ -17,9 +17,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_21_093132) do
   create_table "boards", force: :cascade do |t|
     t.string "name"
     t.string "creator_email"
-    t.integer "rows_count"
-    t.integer "columns_count"
-    t.integer "mines_count"
+    t.integer "height"
+    t.integer "width"
+    t.integer "number_of_mines"
     t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

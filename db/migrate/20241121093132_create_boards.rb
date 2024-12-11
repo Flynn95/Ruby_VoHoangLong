@@ -3,9 +3,9 @@ class CreateBoards < ActiveRecord::Migration[8.0]
     create_table :boards do |t|
       t.string :name
       t.string :creator_email
-      t.integer :rows_count
-      t.integer :columns_count
-      t.integer :mines_count
+      t.integer :height
+      t.integer :width
+      t.integer :number_of_mines
       t.jsonb :data
 
       t.timestamps

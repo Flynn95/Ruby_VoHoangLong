@@ -10,7 +10,7 @@ const characterMapping = {
   '6': '6️⃣',
   '7': '7️⃣',
   '8': '8️⃣',
-  '9': '💣',
+  'M': '💣',
 }
 
 export default class extends Controller {
@@ -22,7 +22,7 @@ export default class extends Controller {
         return
       }
 
-      if (cell.dataset.number !== '9' && cell.dataset.number !== '0') {
+      if (cell.dataset.number !== 'M' && cell.dataset.number !== '0') {
         cell.innerHTML = characterMapping[cell.dataset.number]
         cell.dataset.revealed = true
       }
@@ -37,7 +37,7 @@ export default class extends Controller {
         return
       }
 
-      if (cell.dataset.number !== '9' && cell.dataset.number !== '0') {
+      if (cell.dataset.number !== 'M' && cell.dataset.number !== '0') {
         cell.innerHTML = '⬜️'
         cell.dataset.revealed = false
       }

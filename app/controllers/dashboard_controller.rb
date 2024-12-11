@@ -6,6 +6,6 @@ class DashboardController < ApplicationController
 
   private
     def board_params
-      params.permit(:name, :creator_email, :rows_count, :columns_count, :mines_count)
+      params.permit(:name, :creator_email, :height, :width, :number_of_mines)
     end
 end

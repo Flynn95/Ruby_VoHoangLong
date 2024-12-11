@@ -6,12 +6,12 @@ class BoardsController < ApplicationController
   end
 
   def show
-    @preformatted_data = BoardDataFormatter.new(@board.data).format
+    @preformatted_data = GameBoard::DataFormatter.new(@board.data).format
   end
 
   def create
     @board = Board.new(board_params)
-    @board.data = BoardCellsGenerator.new(@board.rows_count, @board.columns_count, @board.mines_count).generate if @board.valid?
+    @board.data = GameBoard::CellsGenerator.new(@board.height, @board.width, @board.number_of_mines).generate if @board.valid?
 
     if @board.save
       redirect_to root_path, notice: "Minesweeper board was successfully created. Click #{view_context.link_to 'here', board_path(@board), class: "alert-link"} to view it."
@@ -33,7 +33,7 @@ class BoardsController < ApplicationController
 
   private
     def board_params
-      params.require(:board).permit(:name, :creator_email, :rows_count, :columns_count, :mines_count)
+      params.require(:board).permit(:name, :creator_email, :height, :width, :number_of_mines)
     end
 
     def set_board

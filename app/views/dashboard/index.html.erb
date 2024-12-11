@@ -15,15 +15,15 @@
       </div>
       <div class="mb-1">
         <label for="columns" class="form-label">Board Width:</label>
-        <%= form.number_field :columns_count, class: "form-control", required: true %>
+        <%= form.number_field :width, class: "form-control", required: true %>
       </div>
       <div class="mb-1">
         <label for="rows" class="form-label">Board Height:</label>
-        <%= form.number_field :rows_count, class: "form-control", required: true %>
+        <%= form.number_field :height, class: "form-control", required: true %>
       </div>
       <div class="mb-3">
         <label for="mines" class="form-label">Number of Mines:</label>
-        <%= form.number_field :mines_count, class: "form-control", required: true %>
+        <%= form.number_field :number_of_mines, class: "form-control", required: true %>
       </div>
       <button type="submit" class="btn btn-primary btn-block">Generate Board</button>
     <% end %>
